@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-mist: #f2f1ef;
+  --color-pearl: #e8e7e4;
+  --color-silver: #c8c6c3;
+  --color-ash: #8a8884;
+  --color-slate: #4a4a48;
+  --color-ink: #141414;
+  --color-charcoal: #2a2a28;
+
+  --color-ivory: #f2f1ef;
+  --color-beige: #c8c6c3;
+  --color-taupe: #8a8884;
+  --color-graphite: #4a4a48;
+  --color-champagne: #e8e7e4;
+  --color-soft-graphite: #6e6c69;
+
+  --font-display: 'Bodoni Moda', 'Times New Roman', serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-body: 'Sora', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', system-ui, sans-serif;
+  --font-date: 'Cormorant Garamond', 'Bodoni Moda', Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--color-mist);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-silver) 55%, transparent);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+  }
+
+  .font-script {
+    font-family: var(--font-script);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .font-label {
+    font-family: var(--font-label);
+  }
+
+  .font-date {
+    font-family: var(--font-date);
+    font-optical-sizing: auto;
+    font-variation-settings: 'opsz' 72;
+  }
+
+  .grain {
+    position: relative;
+  }
+
+  .grain::after {
+    content: '';
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .editorial-frame {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-silver) 55%, transparent);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  .animate-marquee {
+    animation: marquee-scroll 70s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-scroll-reverse 70s linear infinite;
+    will-change: transform;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-scroll-reverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none !important;
+  }
+}
